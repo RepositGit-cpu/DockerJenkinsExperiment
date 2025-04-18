@@ -3,20 +3,17 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/name/myfirst.git'
+                git branch: 'main', url: 'https://github.com/RepositGit-cpu/DockerJenkinsExperiment'
             }
         }
         stage('Build Docker Image') {
             steps {
-                dir('DockerJenkinsExperiment') { // Ensure Docker build happens in the right folder
-                    sh 'ls -l' // Debugging: List files to check if Dockerfile exists
-                    sh 'docker build -t my-docker-webapp .' // Build Docker Image
-                }
+                sh 'docker build -t dockerjenkinsexperiment .'
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8081:80 my-docker-webapp'
+                sh 'docker run -d -p 8081:80 dockerjenkinsexperiment'
             }
         }
     }
